@@ -21,5 +21,19 @@ dotnet test --logger "trx;LogFileName=TestOutputResults.xml"
 
 This will, again, be placed within each test project's `TestOutput` directory. But, this time the file will be overwritten each run.
 
-Once you've done that, you can actually run jerk to transform the output
+Once you've done that, you can actually run jerk to transform the output.
 
+It's not a dotnet tool yet so you're on your own to build it. Clone this repository and run the following locally at the root:
+
+```
+dotnet build
+dotnet publish -o ./dist
+```
+
+That will give you everything you need in the /dist folder.
+
+Once built, you call `jerk` with the root path to search and, optionally, the glob pattern to match, and the output csv file name
+
+```
+jerk . -p **/TestOutputResults.xml -o testSummary.csv
+```
