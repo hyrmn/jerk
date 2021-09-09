@@ -1,2 +1,25 @@
 # jerk
 Joe Everyman's Reporting Konverter
+
+This is a small CLI utility to take the XML output from `dotnet test` in TRX-format and transform it into something else. The assumption is that you'll pass in several input XML files and output to a combined transformed file.
+
+The only transformer currently included will convert to a CSV that simply shows the test status, the test name and???
+
+## Using
+
+Before calling this tool, you should have done something to generate some test output. For example, with .NET Core 2.2+ (including .NET 5.0 and .NET 6.0), you might run something like
+
+```
+dotnet test --logger "trx"
+```
+
+This will place a .TRX file in a `TestResults` directory within each test project. The filename will contain a unique pattern so that future runs won't overwrite your current output. For your usage, that may not be useful. Instead, you can specify a filename for the output.
+
+```
+dotnet test --logger "trx;LogFileName=TestOutputResults.xml"
+```
+
+This will, again, be placed within each test project's `TestOutput` directory. But, this time the file will be overwritten each run.
+
+Once you've done that, you can actually run jerk to transform the output
+

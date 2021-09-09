@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "jerk": {
+      "commandName": "Project",
+      "commandLineArgs": "c:\\code\\jerk"
+    }
+  }
+}
