@@ -10,7 +10,6 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace src
@@ -32,7 +31,7 @@ namespace src
             [Description("Path to search. Defaults to current working directory.")]
             [CommandArgument(0, "[searchPath]")]
             [DefaultValue(".")]
-            public string? SearchPath { get; init; }
+            public string? SearchPath { get; set; }
 
             [CommandOption("-p|--pattern <GLOB>")]
             [Description("The file glob to match")]
@@ -67,7 +66,10 @@ namespace src
 
             static List<FileInfo> getFiles(Settings settings)
             {
-                var glob = Glob.Parse(settings.SearchPattern);
+                var options = new GlobOptions();
+                options.Evaluation.CaseInsensitive = true;
+
+                var glob = Glob.Parse(settings.SearchPattern, options);
                 var directory = new DirectoryInfo(settings.SearchPath);
                 return directory.GetFiles("*", SearchOption.AllDirectories).Where(f => glob.IsMatch(f.FullName)).ToList();
             }
