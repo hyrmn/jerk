@@ -34,8 +34,14 @@ dotnet publish -o ./dist
 
 That will give you everything you need in the /dist folder.
 
-Once built, you call `jerk` with the root path to search and, optionally, the glob pattern to match, and the output csv file name
+Once built, you call `jerk` with the root path to search and, optionally, the glob pattern to match, and the output csv file name:
 
 ```
 jerk . -p **/TestOutputResults.xml -o testSummary.csv
+```
+
+Or, if you're not running `jerk` from your solution's root directory, you might want to run it like:
+
+```
+jerk c:\work\MyAwesomeProject -p **/TestOutputResults.xml -o c:\work\testSummary.csv
 ```
