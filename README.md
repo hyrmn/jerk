@@ -5,7 +5,7 @@ This is a small CLI utility to take the XML output from `dotnet test` in TRX-for
 
 The only transformer currently included will convert to a CSV that simply shows the test status, the test name and???
 
-## Using
+## Generating the test runner XML output
 
 Before calling this tool, you should have done something to generate some test output. For example, with .NET Core 2.2+ (including .NET 5.0 and .NET 6.0), you might run something like
 
@@ -21,7 +21,9 @@ dotnet test --logger "trx;LogFileName=TestOutputResults.xml"
 
 This will, again, be placed within each test project's `TestOutput` directory. But, this time the file will be overwritten each run.
 
-Once you've done that, you can actually run jerk to transform the output.
+## Using
+
+Once you have some test runner xml output to process, you can actually run jerk to transform the output.
 
 It's not a dotnet tool yet so you're on your own to build it. Clone this repository and run the following locally at the root:
 
