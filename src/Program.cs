@@ -86,7 +86,7 @@ namespace src
         }
     }
 
-    public record TestResult(string TestName, string Outcome);
+    public record TestResult(string TestName, string Outcome, string TestOutput);
 
     public class FileProcessor
     {
@@ -96,7 +96,20 @@ namespace src
             var results = doc.Descendants().Where(node => node.Name.LocalName == "UnitTestResult");
             foreach(var node in results)
             {
-                yield return new TestResult(node.Attribute("testName").Value, node.Attribute("outcome").Value);
+                var testOutput = getTestOutput(node);
+
+                yield return new TestResult(node.Attribute("testName").Value, node.Attribute("outcome").Value, testOutput);
+            }
+
+            static string getTestOutput(XElement node)
+            {
+                var outputNode = node.Descendants().Where(n => n.Name.LocalName == "Output").FirstOrDefault();
+                if (outputNode is null) return string.Empty;
+
+                var testOutputNode = outputNode.Descendants().FirstOrDefault(n => n.Name.LocalName == "StdOut")
+                    ?? outputNode.Descendants().FirstOrDefault(n => n.Name.LocalName == "Message");
+
+                return $"'{testOutputNode?.Value ?? string.Empty}";
             }
         }
     }
