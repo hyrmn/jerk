@@ -109,7 +109,7 @@ namespace src
                 var testOutputNode = outputNode.Descendants().FirstOrDefault(n => n.Name.LocalName == "StdOut")
                     ?? outputNode.Descendants().FirstOrDefault(n => n.Name.LocalName == "Message");
 
-                return $"'{testOutputNode?.Value ?? string.Empty}";
+                return testOutputNode?.Value ?? string.Empty;
             }
         }
     }
