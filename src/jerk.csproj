@@ -3,6 +3,9 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+	<PackAsTool>true</PackAsTool>
+	<ToolCommandName>trx2csv</ToolCommandName>
+	<PackageId>hyrmn.trx2csv</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
